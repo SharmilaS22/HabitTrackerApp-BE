@@ -1,5 +1,5 @@
 const express = require('express')
-const helloWorldController = require('../../controllers/hello.controller')
+import helloWorldController from '../../controllers/hello.controller';
 
 const router = express.Router()
 

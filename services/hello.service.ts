@@ -2,6 +2,6 @@ const getGreeting = async () => {
     return 'Hello World!'
 }
 
-module.exports = {
+export default {
     getGreeting
 }
