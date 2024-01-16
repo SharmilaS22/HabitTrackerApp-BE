@@ -16,6 +16,20 @@ const greeting = async (_req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+const addUser = async (_req: Request, res: Response, next: NextFunction) => {
+  try {
+    const result = await helloWorldService.addUser(_req.body);
+
+    return res.status(httpStatus.OK).json({
+      success: true,
+      status: httpStatus.OK,
+      data: result,
+    });
+  } catch (err) {
+    return next(err);
+  }
+};
+
 export default {
-  greeting,
+  greeting, addUser
 };
