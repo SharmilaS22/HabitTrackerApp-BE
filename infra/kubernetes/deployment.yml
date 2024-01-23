@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: be-deploy
+  labels:
+    app: be-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: be-app
+  template:
+    metadata:
+      labels:
+        app: be-app
+    spec:
+      containers:
+      - name: ht-app-be-basic
+        image: ht_app_be:1
+        ports:
+        - containerPort: 3001
+        imagePullPolicy: IfNotPresent

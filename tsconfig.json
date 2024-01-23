@@ -2,20 +2,22 @@
     "compilerOptions": {
         "target": "ESNext",
         "module": "commonjs",
-        "outDir": "./app",
+        "outDir": "./dist",
         "rootDir": "./",
         "strict": true,
         "esModuleInterop": true,
         "resolveJsonModule": true,
-        "sourceMap": true,
+        "sourceMap": false,
         "noEmit": false,
     },
     "include": [
         "*.ts",
         "*.spec.ts",
-        "*.controller.ts",
-        "*.service.ts",
-        "*.route.ts"
+        "**/*.controller.ts",
+        "**/*.service.ts",
+        "**/*.route.ts",
+        "**/*.model.ts",
+        "**/*.ts"
     ],
     "exclude": [
         "node_modules"

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import httpStatus from 'http-status';
-import helloWorldService from '../services/hello.service';
+import helloWorldService from '../services/user.service';
 
 const greeting = async (_req: Request, res: Response, next: NextFunction) => {
   try {

@@ -1,8 +1,8 @@
 const express = require('express')
-const helloWorldRoute = require('./hello.route')
+const userRoute = require('./user.route')
 
 const router = express.Router()
 
-router.use('/', helloWorldRoute)
+router.use('/user', userRoute)
 
 module.exports = router
