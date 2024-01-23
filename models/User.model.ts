@@ -29,7 +29,7 @@ User.init(
         id: {
             type: DataTypes.UUID,
             primaryKey: true,
-            defaultValue: uuidv4(),
+            defaultValue: DataTypes.UUIDV4,
         },
         name: {
             type: DataTypes.STRING,
@@ -53,7 +53,7 @@ User.init(
     },
     {
         sequelize,
-        modelName: 'User',
+        modelName: 'user',
     }
 );
 

@@ -12,4 +12,12 @@ const sequelize = new Sequelize(
   host: process.env.DB_HOST,
 });
 
+sequelize.sync()
+  .then(() => {
+      console.log('Database is synced');
+  })
+  .catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  });
+
 export { sequelize };

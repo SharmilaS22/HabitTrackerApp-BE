@@ -6,18 +6,53 @@ interface UserRequest {
 }
 
 async function addUser(userRequest: UserRequest) {
-
-    await sequelize.sync({ force: true }).then(() => {
-        console.log('User table synced');
-    }).catch((error) => {
-        console.error('Error syncing User table:', error);
-    });
-
     const user = await User.create({
         ...userRequest
     });
+    console.log('User Created');
+}
 
-    console.log('User CREATED');
+async function getUser(userid: string) {
+    try {
+        return await User.findByPk(userid);
+    } catch (err) {
+        return null;
+    }
+}
+
+async function updateUser(userid: string, userRequest: UserRequest): Promise<{ success: boolean }> {
+
+    return await User.update({
+        name: userRequest.name
+    }, {
+        where: {
+            id: userid
+        }
+    }).then(count => {
+        if (count[0] === 1) {
+            console.log("User updated successfully");
+            return { success: true };
+        }
+        console.log("No User found")
+        return { success: false };
+    }).catch(err => {
+        console.log("Error updating user: ", err);
+        return { success: false }
+    });
+}
+
+async function deleteUser(userid: string): Promise<{ success: boolean }> {
+    const user = await User.findByPk(userid);
+    try {
+        if (user) {
+            await user.destroy();
+            return { success: true }
+        }
+    } catch (err) {
+        console.log("Error deleting user: ", err);
+        return { success: false }
+    }
+    return { success: false }
 }
 
 const getGreeting = async () => {
@@ -25,5 +60,5 @@ const getGreeting = async () => {
 }
 
 export default {
-    getGreeting, addUser
+    getGreeting, addUser, getUser, updateUser, deleteUser
 }
