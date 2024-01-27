@@ -18,13 +18,22 @@ const greeting = async (_req: Request, res: Response, next: NextFunction) => {
 
 const addUser = async (_req: Request, res: Response, next: NextFunction) => {
   try {
-    const result = await userService.addUser(_req.body);
+    const { success, data } = await userService.addUser(_req.body);
 
-    return res.status(httpStatus.CREATED).json({
-      success: true,
-      status: httpStatus.OK,
-      data: result,
-    });
+    if (success) {
+      return res.status(httpStatus.CREATED).json({
+        success: true,
+        status: httpStatus.OK,
+        data: data,
+      });
+    } else {
+      return res.status(httpStatus.BAD_REQUEST).json({
+        success: false,
+        status: httpStatus.BAD_REQUEST,
+        message: 'Bad Request',
+      });
+    }
+    
   } catch (err) {
     return next(err);
   }
@@ -90,10 +99,7 @@ const deleteUser = async (_req: Request, res: Response, next: NextFunction) => {
       message: 'User not found',
     });
   } catch (err) {
-    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-      success: false,
-      message: 'Internal Server Error',
-    });
+    return next(err);
   }
 }
 

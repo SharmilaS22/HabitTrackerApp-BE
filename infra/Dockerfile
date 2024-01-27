@@ -9,6 +9,7 @@ RUN npm ci
 COPY . .
 
 RUN npm run build && cp package*.json ./dist/ && cd ./dist/ && npm ci --production 
+# TODO remove tests from dist
 
 
 FROM node:20-alpine

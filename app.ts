@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 
 // https://github.com/sskender/nodejs-backend-starter.git
 
@@ -12,5 +12,10 @@ app.use('/api/v1', require('./routes/v1/index'))
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello, World!');
 });
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error(err.stack)
+  res.status(500).send('Internal Server Error');
+})
 
 app.listen(PORT, () => console.log("User service started"));

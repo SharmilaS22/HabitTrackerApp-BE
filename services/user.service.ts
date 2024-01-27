@@ -1,15 +1,18 @@
 import { User } from '../models/User.model';
-import { sequelize } from '../config/database';
 
 interface UserRequest {
     name: string;
 }
 
 async function addUser(userRequest: UserRequest) {
-    const user = await User.create({
-        ...userRequest
-    });
-    console.log('User Created');
+    try {
+        const user = await User.create({
+            ...userRequest
+        });
+        return { success: true, data: user };
+    } catch (err) {
+        return { success: false, data: null };
+    }
 }
 
 async function getUser(userid: string) {
